@@ -1,0 +1,93 @@
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
+
+public class gb_sem_1 {
+
+    public static int Sum(int N){ // O(N)
+        int result = 0;
+        for(int i=1; i<=N; i++){
+            result += i;
+        }
+
+        result = N * (N + 1) / 2; // O(1)
+
+        return result;
+    }
+
+    public static List<Integer> Simple(int N){ // O(N^2)
+        List<Integer> result = new ArrayList<>();
+        for(int i = 2; i <= N; i++){
+            boolean simple = true;
+            for(int j = 2; j <= i; j++){ // O(N * sqrt(N))
+                if(i % j == 0){
+                    simple = false;
+                    break;
+                }
+            }
+            if(simple){
+                result.add(i);
+            }
+        }
+        return result;
+    }
+
+    public static int recCubs(int depth, int K, int N){
+        if(depth == K)
+            return 1;
+        int count = 0;
+        for(int i = 1; i <= N; i++) {
+            count += recCubs(depth + 1, K, N);
+        }
+        return count;
+    }
+    public static int Cubs(int K, int N){
+        return recCubs(0, K, N);
+    }
+
+    public static int Fib(int N){
+        if(N==1 || N==2)
+            return 1;
+        return Fib(N-1) + Fib(N-2);
+    }
+
+    public static int linFib(int N){ // O(N)
+        if(N == 1)
+            return 1;
+        int F[] = new int[N + 1];
+        F[1] = 1;
+        F[2] = 1;
+        // F[N] = F[N-1] + F[N-2]
+        for(int i = 3; i <= N; i++)
+            F[i] = F[i-1] + F[i-2];
+        return F[N];
+    }
+
+    public static void test(){
+        for(int i=10; i<=50; i++){
+            Date start = new Date();
+            Fib(i);
+            Date end = new Date();
+            long time1 = end.getTime() - start.getTime();
+
+            start = new Date();
+            linFib(i);
+            end = new Date();
+            long time2 = end.getTime() - start.getTime();
+
+            System.out.printf("N: %d, time1: %d, time2: %d%n", i, time1, time2);
+
+        }
+    }
+    public static void main(String[] args) {
+        //System.out.println(Sum(10));
+//        List<Integer> result = Simple(1000000);
+//
+//        for (Integer i:result) {
+//            System.out.printf("%d ", i);
+//        }
+        //System.out.println(Cubs(4, 6)); // 6^4 // O(N^K)
+        //System.out.println(linFib(10));
+        test();
+    }
+}
