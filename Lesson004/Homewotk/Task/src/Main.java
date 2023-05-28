@@ -14,5 +14,8 @@ public class Main {
 
         // Выводим дерево в порядке in-order
         tree.printTree();
+
+        System.out.println("ищем 20");
+        System.out.println(tree.search(20)); // true
     }
 }

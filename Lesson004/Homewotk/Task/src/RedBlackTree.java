@@ -91,11 +91,29 @@ public class RedBlackTree {
             System.out.print("    ");
 
         if (node.color == RED)
-            System.out.println(node.key + " (R)");
+            System.out.println("\033[31m" + node.key + "\033[0m");
         else
-            System.out.println(node.key + " (B)");
+            System.out.println("\033[30m" + node.key + "\033[0m");
 
         printTree(node.left, level + 1);
+    }
+
+    // Метод для поиска элемента в дереве
+    public boolean search(int key) {
+        return search(root, key);
+    }
+
+    // Рекурсивный метод для поиска элемента в дереве
+    private boolean search(Node node, int key) {
+        if (node == null)
+            return false;
+
+        if (key < node.key)
+            return search(node.left, key);
+        else if (key > node.key)
+            return search(node.right, key);
+        else
+            return true;
     }
 
 }
